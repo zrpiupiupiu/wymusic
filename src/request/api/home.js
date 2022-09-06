@@ -14,6 +14,6 @@ export function getMusicList(){
 
     return service({
         method:'get',
-        url:'/personalized?limit=10'
+        url:'/personalized?limit=15'
     })
 }
