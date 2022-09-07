@@ -12,13 +12,18 @@
 
     <!-- 底部右边部分 -->
     <div class="footerRight">
-        <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-24gl-playCircle"></use>
+        <svg class="icon" aria-hidden="true" v-if="isbtnShow" @click="play">
+            <use xlink:href="#icon-24gl-playCircle" ></use>
+        </svg>
+        <svg class="icon" aria-hidden="true" v-else @click="play">
+            <use xlink:href="#icon-bofang_" ></use>
         </svg>
         <svg class="icon" aria-hidden="true" >
             <use xlink:href="#icon-24gl-playlistMusic"></use>
         </svg>
     </div>
+
+    <audio ref="audio" :src=" `https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3` "></audio>
 
 
    </div>
@@ -26,12 +31,33 @@
 
 <script>
 
-    import { mapState } from 'vuex'
+
+    import { mapMutations, mapState } from 'vuex'
 
     export default {
         computed:{
-            ...mapState(['playList','playListIndex'])
+            ...mapState(['playList','playListIndex','isbtnShow'])//解构
+        },
+        mounted(){
+            console.log(this.$refs);
+        },
+        methods:{
+            play:function(){
+
+                //判断是不是在播放
+                if(this.$refs.audio.paused){
+                    this.$refs.audio.play()
+                    this.updateIsbtnShow(false)
+
+                }else{
+                    this.$refs.audio.pause()
+                    this.updateIsbtnShow(true)
+                }
+            },
+
+            ...mapMutations(['updateIsbtnShow'])//解构
         }
+        
     }
 </script>
 

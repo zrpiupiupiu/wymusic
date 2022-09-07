@@ -15,10 +15,14 @@ export default createStore({
 
     }],
     playListIndex:0,//默认下标为0
+    isbtnShow:true,//暂停按钮的显示
   },
   getters: {
   },
   mutations: {
+    updateIsbtnShow: function(state,value){
+      state.isbtnShow = value
+    }
   },
   actions: {
   },
