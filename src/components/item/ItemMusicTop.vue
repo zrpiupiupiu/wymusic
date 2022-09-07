@@ -22,7 +22,7 @@
 
         <img :src="playlist.coverImgUrl" alt="" class="miniBG">
 
-        <div class="middleCount">
+        <div>
             <p>
                 <span class="stressFont">{{playlist.name}}</span>
 
@@ -75,8 +75,6 @@
             </svg>
             <span>多选</span>
         </div>
-
-
     </div>
 
 </template>
