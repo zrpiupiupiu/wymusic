@@ -3,7 +3,7 @@
     <div class=itemMusicList>
         <div class="title">
             <div class="titleLeft">
-                <svg class="icon" aria-hidden="true" @click="$router.go(-1)">
+                <svg class="icon" aria-hidden="true" >
                     <use xlink:href="#icon-bofang"></use>
                 </svg>
                 <span class="middleFont">播放全部</span>

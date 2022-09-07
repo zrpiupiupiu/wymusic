@@ -126,11 +126,6 @@
 
     }
 
-    .img{
-        width:33%;
-        height:0.1rem;
-      
-    }
     .name {
         font-size:14px;
     }
