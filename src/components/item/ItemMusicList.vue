@@ -23,9 +23,9 @@
                 <span class="leftSpan">{{ i + 1}}</span>
                 <div>
                     <p>{{item.name}}</P>
-                        <span v-for="(item1,index) in item.ar" :key="index" class="arName">
-                            {{item1.name}}
-                        </span>
+                    <span v-for="(item1,index) in item.ar" :key="index" class="arName">
+                        {{item1.name}}
+                    </span>
                 </div>
             </div>
 

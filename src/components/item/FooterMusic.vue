@@ -30,7 +30,7 @@
     <audio ref="audio" :src=" `https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`" autoplay="autoplay" ></audio>
 
     <van-popup v-model:show="detailShow" position="bottom" :style="{ height: '100%',width:'100%' }">
-        弹出层内容
+        <MusicDetail :musicList="playList[playListIndex]"  />
     </van-popup>
 
    </div>
@@ -39,6 +39,7 @@
 <script>
 
     import { mapMutations, mapState } from 'vuex'
+    import MusicDetail from '@/components/item/MusicDetail.vue'
 
     export default {
         computed:{
@@ -82,14 +83,12 @@
                 if(this.isbtnShow){
                     // this.$refs.audio.play()
                      this.updateIsbtnShow(false)
-
-                    
-                
-
                 }
             }
+        },
+        components:{
+            MusicDetail
         }
-        
     }
 </script>
 
