@@ -9,9 +9,10 @@
                     <use xlink:href="#icon-zuojiantou"></use>
                 </svg>
                 <div class="topLeftWord">
-                    <p>{{musicList.al.name}}</p>
+                    <Vue3Marquee style="color:white">
+                        {{musicList.al.name}}
+                    </Vue3Marquee>
                 
-                   
                     <span v-for="item in musicList.ar" :key="item" class="alName">
                         {{item.name}}
                     </span>
@@ -35,12 +36,18 @@
 </template>
 
 <script>
+    import { Vue3Marquee } from 'vue3-marquee'
+    import 'vue3-marquee/dist/style.css'
+
     export default {
 
         mounted(){
             console.log(this.musicList);
         },
-        props:['musicList']
+        props:['musicList'],
+       components:{
+        Vue3Marquee,
+       }
     }
 </script>
 
@@ -76,11 +83,8 @@
     }
     .alName{
         font-size:14px;
-        color:rgba(255, 253, 253, 0.833);
+        color:#999;
     }
-
-
-
 
     .detailTopRight{
         margin: 0.2rem;
@@ -88,6 +92,7 @@
     .mIcon{
         height: 12px;;
         width:15px;
+        fill:#999
     }
 
 
