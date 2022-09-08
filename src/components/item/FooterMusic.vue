@@ -2,7 +2,7 @@
    <div class="FooterMusic">
 
     <!-- 底部左边部分 -->
-    <div class="footerLeft" >
+    <div class="footerLeft" @click="updateDetailShow" >
         <img :src="playList[playListIndex].al.picUrl" alt="" class="footerImg">
         <div>
             <div>
@@ -29,6 +29,9 @@
 
     <audio ref="audio" :src=" `https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`" autoplay="autoplay" ></audio>
 
+    <van-popup v-model:show="detailShow" position="bottom" :style="{ height: '100%',width:'100%' }">
+        弹出层内容
+    </van-popup>
 
    </div>
 </template>
@@ -39,7 +42,7 @@
 
     export default {
         computed:{
-            ...mapState(['playList','playListIndex','isbtnShow'])//解构
+            ...mapState(['playList','playListIndex','isbtnShow','detailShow'])//解构
         },
         mounted(){
             console.log(this.$refs);
@@ -58,7 +61,7 @@
                 }
             },
 
-            ...mapMutations(['updateIsbtnShow'])//解构
+            ...mapMutations(['updateIsbtnShow','updateDetailShow'])//解构
         },
         watch:{
             playListIndex:function(){//监听,如果下标发生改变,就自动播放音乐

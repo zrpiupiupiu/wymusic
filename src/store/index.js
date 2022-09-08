@@ -16,6 +16,7 @@ export default createStore({
     }],
     playListIndex:0,//默认下标为0
     isbtnShow:true,//暂停按钮的显示
+    detailShow: false,//歌曲详情页的显示,默认为false不显示
   },
   getters: {
   },
@@ -29,6 +30,9 @@ export default createStore({
     },
     updatePlayListIndex:function(state,value){
       state.playListIndex = value
+    },
+    updateDetailShow:function(state){
+      state.detailShow= !state.detailShow//取反
     }
 
   },
