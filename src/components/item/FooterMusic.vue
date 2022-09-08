@@ -2,10 +2,14 @@
    <div class="FooterMusic">
 
     <!-- 底部左边部分 -->
-    <div class="footerLeft">
+    <div class="footerLeft" >
         <img :src="playList[playListIndex].al.picUrl" alt="" class="footerImg">
         <div>
-            {{playList[playListIndex].al.name}}
+            <div>
+                {{playList[playListIndex].al.name}}
+            </div>
+          
+            <span class="tip">(左右滑动可以切换歌曲哦)</span>
         
         </div>
     </div>
@@ -23,7 +27,7 @@
         </svg>
     </div>
 
-    <audio ref="audio" :src=" `https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3` "></audio>
+    <audio ref="audio" :src=" `https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`" autoplay="autoplay" ></audio>
 
 
    </div>
@@ -56,6 +60,22 @@
             },
 
             ...mapMutations(['updateIsbtnShow'])//解构
+        },
+        watch:{
+            playListIndex:function(){//监听,如果下标发生改变,就自动播放音乐
+                // if(this.$refs.audio.paused){
+                //     this.$refs.audio.play()
+                //     this.updateIsbtnShow(false)
+                // }else{
+                //     this.$refs.audio.play()
+
+                // }
+
+                this.$refs.autoplay=true;
+                if(this.$refs.audio.paused){//判断,如果本身为暂停状态,还需要改变图标
+                    this.updateIsbtnShow(false)
+                }
+            }
         }
         
     }
@@ -79,6 +99,10 @@
         display: flex;
         justify-content: space-around;
         align-content: center;
+    }
+    .tip{
+        font-size:12px;
+        color:gray;
     }
 
     .footerImg{

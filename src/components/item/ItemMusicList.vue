@@ -19,7 +19,7 @@
         <div class="itemList" v-for="(item,i) in playlist.tracks" :key="i">
             
             <!-- 左边部分 -->
-            <div class="itemListLeft" >
+            <div class="itemListLeft" @click="playMusic(i)">
                 <span class="leftSpan">{{ i + 1}}</span>
                 <div>
                     <p>{{item.name}}</P>
@@ -49,11 +49,23 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
     export default {
         setup(props){
             console.log(props)
         },
         props:['playlist'],
+
+        methods:{
+            playMusic: function(i){
+                this.updatePlayList(this.playlist.tracks)
+                this.updatePlayListIndex(i)
+
+            },
+
+            ...mapMutations(['updatePlayList','updatePlayListIndex'])
+        }
     }
 </script>
 
