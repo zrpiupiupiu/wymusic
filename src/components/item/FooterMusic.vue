@@ -35,7 +35,6 @@
 
 <script>
 
-
     import { mapMutations, mapState } from 'vuex'
 
     export default {
@@ -71,9 +70,19 @@
 
                 // }
 
-                this.$refs.autoplay=true;
+                // this.$refs.autoplay=true;
                 if(this.$refs.audio.paused){//判断,如果本身为暂停状态,还需要改变图标
                     this.updateIsbtnShow(false)
+                }
+            },
+            playList:function(){
+                if(this.isbtnShow){
+                    // this.$refs.audio.play()
+                     this.updateIsbtnShow(false)
+
+                    
+                
+
                 }
             }
         }
