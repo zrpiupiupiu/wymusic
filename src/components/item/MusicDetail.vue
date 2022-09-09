@@ -5,7 +5,7 @@
     <div class="detailTop">
         <!-- 顶部左边 -->
         <div class="detailTopLeft">
-            <svg class="icon" aria-hidden="true" >
+            <svg class="icon" aria-hidden="true"  @click="updateDetailShow" >
                 <use xlink:href="#icon-zuojiantou"></use>
             </svg>
             <div class="topLeftWord">
@@ -32,11 +32,57 @@
 
         </div>
     </div>
-
+    <!-- 中间 -->
     <div class="detailContent">
         <img src="@/assets/needle-ab.png" alt="" class="img_needle">
         <img src="@/assets/circle.png" alt="" class="img_circle">
         <img :src="musicList.al.picUrl" alt="" class="img_core">
+    </div>
+    <!-- 底部 -->
+    <div class="detailFooter">
+        <div class="footerTop">
+            <svg class="icon" aria-hidden="true" >
+                <use xlink:href="#icon-aixin"></use>
+            </svg>
+            <svg class="icon" aria-hidden="true" >
+                <use xlink:href="#icon-xiazai1"></use>
+            </svg>
+            <svg class="icon" aria-hidden="true" >
+                <use xlink:href="#icon-changpian2-copy"></use>
+            </svg>
+            <svg class="icon" aria-hidden="true" >
+                <use xlink:href="#icon-31xiaoxi"></use>
+            </svg>
+            <svg class="icon" aria-hidden="true" >
+                <use xlink:href="#icon-gengduo-shuxiang"></use>
+            </svg>
+
+        </div>
+        <div class="footerMiddle">
+
+        </div>
+        <div class="footer">
+            <svg class="icon" aria-hidden="true" >
+                <use xlink:href="#icon-icon-"></use>
+            </svg>
+            <svg class="icon" aria-hidden="true" >
+                <use xlink:href="#icon-shangyishoushangyige"></use>
+            </svg>
+            <svg class="icon" aria-hidden="true" v-if="isbtnShow"  @click="play">
+                <use xlink:href="#icon-bofang1"></use>
+            </svg>
+            <svg class="icon" aria-hidden="true" v-else @click="play">
+                <use xlink:href="#icon-bofang_" ></use>
+            </svg>
+            <svg class="icon" aria-hidden="true" >
+                <use xlink:href="#icon-xiayigexiayishou"></use>
+            </svg>
+            <svg class="icon" aria-hidden="true" >
+                <use xlink:href="#icon-24gl-playlistMusic"></use>
+            </svg>
+
+
+        </div>
     </div>
 
 
@@ -46,14 +92,18 @@
 <script>
     import { Vue3Marquee } from 'vue3-marquee'
     import 'vue3-marquee/dist/style.css'
+    import { mapMutations } from 'vuex';
 
     export default {
 
         mounted(){
             console.log(this.musicList);
         },
-        props:['musicList'],
-       components:{
+        props:['musicList','isbtnShow','play'],
+        methods:{
+            ...mapMutations(['updateDetailShow'])
+        },
+        components:{
         Vue3Marquee,
        }
     }
@@ -136,6 +186,28 @@
         bottom: 2.74rem;
         left: 32%;
     }
+    .detailFooter{
+        width: 100%;
+        height: 3rem;
+        position: absolute;
+        bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        
+    }
+    .footerTop,.footer{
+        width: 100%;
+        height: 1rem;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
 
+    }
+    .icon{
+        width: 18px;
+        height: 18px;
+        fill: rgb(245,234, 234);
+
+    }
 
 </style>

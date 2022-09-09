@@ -11,7 +11,10 @@ export default createStore({
         pic_str: "109951166724351491",
         
       },
-      id:436514312
+      id:436514312,
+      ar:[{
+        name:"赵雷"
+      }]
 
     }],
     playListIndex:0,//默认下标为0

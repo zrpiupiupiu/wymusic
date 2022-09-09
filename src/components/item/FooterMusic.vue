@@ -30,7 +30,7 @@
     <audio ref="audio" :src=" `https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`" autoplay="autoplay" ></audio>
 
     <van-popup v-model:show="detailShow" position="bottom" :style="{ height: '100%',width:'100%' }">
-        <MusicDetail :musicList="playList[playListIndex]"  />
+        <MusicDetail :musicList="playList[playListIndex]" :play="play" :isbtnShow="isbtnShow" />
     </van-popup>
 
    </div>
