@@ -34,9 +34,13 @@
     </div>
     <!-- 中间 -->
     <div class="detailContent">
-        <img src="@/assets/needle-ab.png" alt="" class="img_needle">
+        <img src="@/assets/needle-ab.png" alt="" class="img_needle" :class="{img_needle_active:!isbtnShow}">
         <img src="@/assets/circle.png" alt="" class="img_circle">
-        <img :src="musicList.al.picUrl" alt="" class="img_core">
+        <!-- <img :src="musicList.al.picUrl" alt="" class="img_core" :class="{img_core_paused:isbtnShow,img_core_active:!isbtnShow}"> -->
+        <img :src="musicList.al.picUrl" alt="" class="img_core" :class="isbtnShow?'img_core_paused':'img_core_active'">
+        <!-- 两种写法都可以,感觉三目更易懂233 -->
+
+        
     </div>
     <!-- 底部 -->
     <div class="detailFooter">
@@ -166,7 +170,16 @@
         position: absolute;
         left: 46%;
         transform-origin: 0 0 ;
-        transform: rotate(-10deg);
+        transform: rotate(-8deg);
+        transition: all 2s;
+    }
+    .img_needle_active {
+        width: 2rem;
+        height: 3rem;
+        position: absolute;
+        left: 46%;
+        transform-origin: 0 0 ;
+        transform: rotate(5deg);
         transition: all 2s;
     }
     .img_circle{
@@ -185,6 +198,22 @@
         position: absolute;
         bottom: 2.74rem;
         left: 32%;
+        animation: rotete_core 10s linear infinite;
+    }
+    .img_core_active{
+        animation-play-state: running;
+    }
+    .img_core_paused{
+        animation-play-state: paused;
+    }
+    @keyframes rotete_core {
+        0%{
+            transform: rotateZ(0deg);
+        }
+        100%{
+            transform: rotateZ(360deg);
+        }
+        
     }
     .detailFooter{
         width: 100%;
