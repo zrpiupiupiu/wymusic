@@ -33,7 +33,10 @@
         </div>
     </div>
     <!-- 中间 -->
-    <div class="detailContent">
+    <div class="musicLyric">
+        {{lyricList.lyric}}
+    </div>
+    <div class="detailContent" v-show="isLyricShow">
         <img src="@/assets/needle-ab.png" alt="" class="img_needle" :class="{img_needle_active:!isbtnShow}">
         <img src="@/assets/circle.png" alt="" class="img_circle">
         <!-- <img :src="musicList.al.picUrl" alt="" class="img_core" :class="{img_core_paused:isbtnShow,img_core_active:!isbtnShow}"> -->
@@ -96,9 +99,17 @@
 <script>
     import { Vue3Marquee } from 'vue3-marquee'
     import 'vue3-marquee/dist/style.css'
-    import { mapMutations } from 'vuex';
+    import { mapMutations, mapState } from 'vuex';
 
     export default {
+        date(){
+            return{
+                isLyricShow:false
+            }
+        },
+        computed:{
+            ...mapState(['lyricList'])
+        },
 
         mounted(){
             console.log(this.musicList);

@@ -47,6 +47,13 @@
         },
         mounted(){
             console.log(this.$refs);
+            this.$store.dispatch("getLyric", this.playList[this.playListIndex].id)
+
+        },
+        updated(){
+
+            this.$store.dispatch("getLyric", this.playList[this.playListIndex].id)
+
         },
         methods:{
             play:function(){

@@ -9,3 +9,11 @@ export function getMusicItemList(data){
         url:`/playlist/detail?id=${data}`//注意要用反引号
     })
 }
+
+//获取歌词/lyric?id=33894312
+export function getMusicLyric(data){
+    return service({
+        method:'get',
+        url:`/lyric?id=${data}`//注意要用反引号
+    })
+}
