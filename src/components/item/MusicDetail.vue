@@ -117,7 +117,7 @@
                  let arr;
                 if(this.lyricList.lyric){
                     // eslint-disable-next-line no-unused-vars
-                    arr=this.lyricList.toString().split(/[(\r\n)\r\n]+/).map((item,i)=>{
+                    arr=this.lyricList.lyric.split(/[(\r\n)\r\n]+/).map((item,i)=>{
                         let min=item.slice(1,2);
                         let sec=item.slice(4,6);
                         let mill=item.slice(7,10);
@@ -132,16 +132,16 @@
                         return {min,sec,mill,lrc,time}
                     })
                 }
-                console.log(arr);
+                // console.log(arr);
              
                 return arr;
             }
         },
 
         mounted(){
-            console.log(this.musicList);
-            console.log(this.lyricList.lyric);
-            console.log(typeof(this.lyricList));
+            // console.log(this.musicList);
+            // console.log(this.lyricList.lyric);
+            console.log(typeof(this.lyricList.lyric));
         },
         props:['musicList','isbtnShow','play'],
         methods:{
