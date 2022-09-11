@@ -42,12 +42,18 @@
     import MusicDetail from '@/components/item/MusicDetail.vue'
 
     export default {
+        data(){
+            return{
+                interVal:0
+            }
+        },
         computed:{
             ...mapState(['playList','playListIndex','isbtnShow','detailShow'])//解构
         },
         mounted(){
             console.log(this.$refs);
             this.$store.dispatch("getLyric", this.playList[this.playListIndex].id)
+            this.updateTime()
 
         },
         updated(){
@@ -62,14 +68,22 @@
                 if(this.$refs.audio.paused){
                     this.$refs.audio.play()
                     this.updateIsbtnShow(false)
+                    this.updateTime()//播放则调用函数进行传值
 
                 }else{
                     this.$refs.audio.pause()
                     this.updateIsbtnShow(true)
+                    clearInterval(this.interVal)//暂停则清楚定时器
                 }
             },
+            updateTime:function(){
+                this.interVal=setInterval(()=>{
+                    this.updateCurrentTime(this.$refs.audio.currentTime)
+                    
+                },1000)
+            },
 
-            ...mapMutations(['updateIsbtnShow','updateDetailShow'])//解构
+            ...mapMutations(['updateIsbtnShow','updateDetailShow','updateCurrentTime'])//解构
         },
         watch:{
             playListIndex:function(){//监听,如果下标发生改变,就自动播放音乐

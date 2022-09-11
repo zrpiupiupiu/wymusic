@@ -49,6 +49,7 @@ export default createStore({
       state.lyricList=value
     },
     updateCurrentTime:function(state,value){
+      console.log(state.currentTime);
       state.currentTime=value
     }
 

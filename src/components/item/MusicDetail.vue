@@ -125,14 +125,14 @@
                         
                         let time=parseInt(min)*60*1000+parseInt(sec)*1000+mill;
 
-                        console.log(typeof(min));
+                        // console.log(typeof(min));
                         
-                        console.log(parseInt(min),sec,mill,lrc);
+                        console.log(min,sec,mill,lrc);
                        
                         return {min,sec,mill,lrc,time}
                     })
                 }
-                // console.log(arr);
+                console.log(arr);
              
                 return arr;
             }
@@ -140,8 +140,8 @@
 
         mounted(){
             // console.log(this.musicList);
-            // console.log(this.lyricList.lyric);
-            console.log(typeof(this.lyricList.lyric));
+            // console.log(this.lyricList.lyric);//打印一下歌词
+            // console.log(typeof(this.lyricList.lyric));
         },
         props:['musicList','isbtnShow','play'],
         methods:{
