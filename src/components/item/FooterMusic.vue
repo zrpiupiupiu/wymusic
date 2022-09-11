@@ -6,7 +6,7 @@
         <img :src="playList[playListIndex].al.picUrl" alt="" class="footerImg">
         <div>
             <div>
-                {{playList[playListIndex].al.name}}
+                {{playList[playListIndex].name}}
             </div>
           
             <span class="tip">(左右滑动可以切换歌曲哦)</span>

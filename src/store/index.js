@@ -14,15 +14,20 @@ export default createStore({
         
       },
       id:436514312,
+
+      name:"成都",
+      
       ar:[{
         name:"赵雷"
       }]
+
 
     }],
     playListIndex:0,//默认下标为0
     isbtnShow:true,//暂停按钮的显示
     detailShow: false,//歌曲详情页的显示,默认为false不显示
     lyricList:{},//歌词
+    currentTime:0,//当前时间
   },
   getters: {
   },
@@ -42,6 +47,9 @@ export default createStore({
     },
     updateLyricList:function(state,value){
       state.lyricList=value
+    },
+    updateCurrentTime:function(state,value){
+      state.currentTime=value
     }
 
   },

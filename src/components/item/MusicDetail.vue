@@ -34,7 +34,11 @@
     </div>
     <!-- 中间 -->
     <div class="musicLyric">
-        {{lyricList.lyric}}
+        <!-- {{lyricList}}
+        {{lyric}} -->
+       <p v-for="item in lyric" :key="item" class="lyrics">
+        {{item.lrc}}
+       </p>
     </div>
     <div class="detailContent" v-show="isLyricShow">
         <img src="@/assets/needle-ab.png" alt="" class="img_needle" :class="{img_needle_active:!isbtnShow}">
@@ -108,11 +112,36 @@
             }
         },
         computed:{
-            ...mapState(['lyricList'])
+            ...mapState(['lyricList']),
+            lyric:function(){
+                 let arr;
+                if(this.lyricList.lyric){
+                    // eslint-disable-next-line no-unused-vars
+                    arr=this.lyricList.toString().split(/[(\r\n)\r\n]+/).map((item,i)=>{
+                        let min=item.slice(1,2);
+                        let sec=item.slice(4,6);
+                        let mill=item.slice(7,10);
+                        let lrc=item.slice(11,item.length-1);
+                        
+                        let time=parseInt(min)*60*1000+parseInt(sec)*1000+mill;
+
+                        console.log(typeof(min));
+                        
+                        console.log(parseInt(min),sec,mill,lrc);
+                       
+                        return {min,sec,mill,lrc,time}
+                    })
+                }
+                console.log(arr);
+             
+                return arr;
+            }
         },
 
         mounted(){
             console.log(this.musicList);
+            console.log(this.lyricList.lyric);
+            console.log(typeof(this.lyricList));
         },
         props:['musicList','isbtnShow','play'],
         methods:{
@@ -166,6 +195,22 @@
         height: 12px;;
         width:15px;
         fill:#999
+    }
+    .musicLyric{
+        width: 100%;
+        height: 8rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+        overflow: scroll;
+
+    }
+
+    .lyrics{
+        color: rgb(243, 229, 229);
+        margin-bottom: 20px;
+        
     }
 
     .detailContent{
@@ -249,5 +294,6 @@
         fill: rgb(245,234, 234);
 
     }
+
 
 </style>
