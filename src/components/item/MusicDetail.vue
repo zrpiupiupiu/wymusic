@@ -33,7 +33,7 @@
         </div>
     </div>
     <!-- 中间 -->
-    <div class="musicLyric">
+    <div class="musicLyric" ref="musicLyric">
         <!-- {{lyricList}}
         {{lyric}} -->
        <p v-for="item in lyric" :key="item" :class="{active:(currentTime*1000>=item.time && currentTime*1000<item.pre)}" class="lyrics">
@@ -127,7 +127,7 @@
 
                         // console.log(typeof(min));
                         
-                        console.log(min,sec,mill,lrc);
+                        // console.log(min,sec,mill,lrc);
                        
                         return {min,sec,mill,lrc,time}
                     })
@@ -154,6 +154,19 @@
         props:['musicList','isbtnShow','play'],
         methods:{
             ...mapMutations(['updateDetailShow'])
+        },
+        watch:{
+            currentTime:function(){
+                let p=document.querySelector("p.active")
+                // console.log([p]);
+                if(p&&p.offsetTop>300){
+                    this.$refs.musicLyric.scrollTop=p.offsetTop-300
+                  
+                }
+               
+                // console.log([this.$refs.musicLyric]); 
+            }
+
         },
         components:{
         Vue3Marquee,
