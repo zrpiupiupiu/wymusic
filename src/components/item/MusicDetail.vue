@@ -5,7 +5,7 @@
     <div class="detailTop">
         <!-- 顶部左边 -->
         <div class="detailTopLeft">
-            <svg class="icon" aria-hidden="true"  @click="updateDetailShow" >
+            <svg class="icon" aria-hidden="true"  @click="backHome" >
                 <use xlink:href="#icon-zuojiantou"></use>
             </svg>
             <div class="topLeftWord">
@@ -33,18 +33,18 @@
         </div>
     </div>
     <!-- 中间 -->
-    <div class="musicLyric" ref="musicLyric">
+    <div class="musicLyric" ref="musicLyric" v-show="isLyricShow" @click="isLyricShow=false">
         <!-- {{lyricList}}
         {{lyric}} -->
        <p v-for="item in lyric" :key="item" :class="{active:(currentTime*1000>=item.time && currentTime*1000<item.pre)}" class="lyrics">
         {{item.lrc}}
        </p>
     </div>
-    <div class="detailContent" v-show="isLyricShow">
+    <div class="detailContent" v-show="!isLyricShow">
         <img src="@/assets/needle-ab.png" alt="" class="img_needle" :class="{img_needle_active:!isbtnShow}">
         <img src="@/assets/circle.png" alt="" class="img_circle">
         <!-- <img :src="musicList.al.picUrl" alt="" class="img_core" :class="{img_core_paused:isbtnShow,img_core_active:!isbtnShow}"> -->
-        <img :src="musicList.al.picUrl" alt="" class="img_core" :class="isbtnShow?'img_core_paused':'img_core_active'">
+        <img :src="musicList.al.picUrl" alt="" class="img_core" :class="isbtnShow?'img_core_paused':'img_core_active'" @click="isLyricShow=true">
         <!-- 两种写法都可以,感觉三目更易懂233 -->
 
         
@@ -153,7 +153,11 @@
         },
         props:['musicList','isbtnShow','play'],
         methods:{
-            ...mapMutations(['updateDetailShow'])
+            ...mapMutations(['updateDetailShow']),
+            backHome:function(){
+                this.isLyricShow=false
+                this.updateDetailShow()
+            }
         },
         watch:{
             currentTime:function(){
