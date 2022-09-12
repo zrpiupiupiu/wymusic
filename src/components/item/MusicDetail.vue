@@ -36,7 +36,7 @@
     <div class="musicLyric">
         <!-- {{lyricList}}
         {{lyric}} -->
-       <p v-for="item in lyric" :key="item" class="lyrics">
+       <p v-for="item in lyric" :key="item" :class="{active:(currentTime*1000>=item.time && currentTime*1000<item.pre)}" class="lyrics">
         {{item.lrc}}
        </p>
     </div>
@@ -112,7 +112,7 @@
             }
         },
         computed:{
-            ...mapState(['lyricList']),
+            ...mapState(['lyricList','currentTime']),
             lyric:function(){
                  let arr;
                 if(this.lyricList.lyric){
@@ -121,9 +121,9 @@
                         let min=item.slice(1,2);
                         let sec=item.slice(4,6);
                         let mill=item.slice(7,10);
-                        let lrc=item.slice(11,item.length-1);
+                        let lrc=item.slice(11,item.length);
                         
-                        let time=parseInt(min)*60*1000+parseInt(sec)*1000+mill;
+                        let time=parseInt(min)*60*1000+parseInt(sec)*1000+parseInt(mill);
 
                         // console.log(typeof(min));
                         
@@ -131,6 +131,14 @@
                        
                         return {min,sec,mill,lrc,time}
                     })
+                    arr.forEach((item,i) => {
+                        if(i==arr.length-1){
+                            item.pre=0
+                        }else{
+                            item.pre=arr[i+1].time
+                        }
+                        
+                    });
                 }
                 console.log(arr);
              
@@ -211,6 +219,10 @@
         color: rgb(243, 229, 229);
         margin-bottom: 20px;
         
+    }
+    .active{
+        color: #fff;
+        font-size: 25px;
     }
 
     .detailContent{
