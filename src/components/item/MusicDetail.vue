@@ -118,7 +118,7 @@
                 if(this.lyricList.lyric){
                     // eslint-disable-next-line no-unused-vars
                     arr=this.lyricList.lyric.split(/[(\r\n)\r\n]+/).map((item,i)=>{
-                        let min=item.slice(1,2);
+                        let min=item.slice(1,3);
                         let sec=item.slice(4,6);
                         let mill=item.slice(7,10);
                         let lrc=item.slice(11,item.length);
@@ -132,8 +132,8 @@
                         return {min,sec,mill,lrc,time}
                     })
                     arr.forEach((item,i) => {
-                        if(i==arr.length-1){
-                            item.pre=0
+                        if(i==arr.length-1 || isNaN(arr[i+1].time)){
+                            item.pre=100000;
                         }else{
                             item.pre=arr[i+1].time
                         }
@@ -174,10 +174,14 @@
             currentTime:function(){
                 let p=document.querySelector("p.active")
                 // console.log([p]);
-                if(p&&p.offsetTop>300){
-                    this.$refs.musicLyric.scrollTop=p.offsetTop-250
+                if(p){
+                    if(p.offsetTop>250){
+                        this.$refs.musicLyric.scrollTop=p.offsetTop-250
                   
+                    }
+
                 }
+                
                
                 // console.log([this.$refs.musicLyric]); 
             }
