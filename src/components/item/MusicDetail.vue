@@ -76,7 +76,7 @@
             <svg class="icon" aria-hidden="true" >
                 <use xlink:href="#icon-icon-"></use>
             </svg>
-            <svg class="icon" aria-hidden="true" >
+            <svg class="icon" aria-hidden="true" @click="goPlay(-1)">
                 <use xlink:href="#icon-shangyishoushangyige"></use>
             </svg>
             <svg class="icon" aria-hidden="true" v-if="isbtnShow"  @click="play">
@@ -85,7 +85,7 @@
             <svg class="icon" aria-hidden="true" v-else @click="play">
                 <use xlink:href="#icon-bofang_" ></use>
             </svg>
-            <svg class="icon" aria-hidden="true" >
+            <svg class="icon" aria-hidden="true" @click="goPlay(1)">
                 <use xlink:href="#icon-xiayigexiayishou"></use>
             </svg>
             <svg class="icon" aria-hidden="true" >
@@ -112,7 +112,7 @@
             }
         },
         computed:{
-            ...mapState(['lyricList','currentTime']),
+            ...mapState(['lyricList','currentTime','playListIndex','playList']),
             lyric:function(){
                  let arr;
                 if(this.lyricList.lyric){
@@ -153,10 +153,21 @@
         },
         props:['musicList','isbtnShow','play'],
         methods:{
-            ...mapMutations(['updateDetailShow']),
+            ...mapMutations(['updateDetailShow','updatePlayListIndex']),
             backHome:function(){
                 this.isLyricShow=false
                 this.updateDetailShow()
+            },
+            goPlay:function(num){
+                let index=this.playListIndex+num
+                if(index<0){
+                    index=this.playList.length-1
+                }else if(index==this.playList.length){
+                    index=0
+                }
+
+                this.updatePlayListIndex(index)
+
             }
         },
         watch:{
@@ -164,7 +175,7 @@
                 let p=document.querySelector("p.active")
                 // console.log([p]);
                 if(p&&p.offsetTop>300){
-                    this.$refs.musicLyric.scrollTop=p.offsetTop-300
+                    this.$refs.musicLyric.scrollTop=p.offsetTop-250
                   
                 }
                
