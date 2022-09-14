@@ -28,6 +28,7 @@ export default createStore({
     detailShow: false,//歌曲详情页的显示,默认为false不显示
     lyricList:{},//歌词
     currentTime:0,//当前时间
+    duration:0,//歌曲总时长
   },
   getters: {
   },
@@ -51,7 +52,10 @@ export default createStore({
     updateCurrentTime:function(state,value){
       console.log(state.currentTime);
       state.currentTime=value
-    }
+    },
+    updateDuration:function(state,value){
+      state.duration=value
+    },
 
   },
   actions: {

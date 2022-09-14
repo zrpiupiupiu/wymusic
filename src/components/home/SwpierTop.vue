@@ -35,7 +35,7 @@
                 // })
                 let res=await getBanner();
                 state.images =res.data.banners;
-                console.log(res)
+                // console.log(res)
 
             })
             return { state};

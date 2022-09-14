@@ -30,7 +30,7 @@
     <audio ref="audio" :src=" `https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`" autoplay="autoplay" ></audio>
 
     <van-popup v-model:show="detailShow" position="bottom" :style="{ height: '100%',width:'100%' }">
-        <MusicDetail :musicList="playList[playListIndex]" :play="play" :isbtnShow="isbtnShow" />
+        <MusicDetail :musicList="playList[playListIndex]" :play="play" :isbtnShow="isbtnShow" :addDuration="addDuration" />
     </van-popup>
 
    </div>
@@ -58,7 +58,8 @@
         },
         updated(){
 
-            this.$store.dispatch("getLyric", this.playList[this.playListIndex].id)
+            this.$store.dispatch("getLyric", this.playList[this.playListIndex].id);
+            this.addDuration()
 
         },
         methods:{
@@ -76,6 +77,10 @@
                     clearInterval(this.interVal)//暂停则清楚定时器
                 }
             },
+            addDuration:function(){
+                this.updateDuration(this.$refs.audio.duration)
+
+            },
             updateTime:function(){
                 this.interVal=setInterval(()=>{
                     this.updateCurrentTime(this.$refs.audio.currentTime)
@@ -83,7 +88,8 @@
                 },1000)
             },
 
-            ...mapMutations(['updateIsbtnShow','updateDetailShow','updateCurrentTime'])//解构
+
+            ...mapMutations(['updateIsbtnShow','updateDetailShow','updateCurrentTime','updateDuration'])//解构
         },
         watch:{
             playListIndex:function(){//监听,如果下标发生改变,就自动播放音乐

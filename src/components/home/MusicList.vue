@@ -54,7 +54,7 @@
               
                 let res=await getMusicList();
                 
-                console.log(res)
+                // console.log(res)
                state.musicList =res.data.result;
                
               

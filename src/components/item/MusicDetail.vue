@@ -70,6 +70,7 @@
 
         </div>
         <div class="footerMiddle">
+            <input type="range" class="range" min="0" max="duration" v-model="currentTime" step="0.03">
 
         </div>
         <div class="footer">
@@ -112,7 +113,7 @@
             }
         },
         computed:{
-            ...mapState(['lyricList','currentTime','playListIndex','playList']),
+            ...mapState(['lyricList','currentTime','playListIndex','playList','duration']),
             lyric:function(){
                  let arr;
                 if(this.lyricList.lyric){
@@ -140,7 +141,7 @@
                         
                     });
                 }
-                console.log(arr);
+                // console.log(arr);
              
                 return arr;
             }
@@ -150,8 +151,9 @@
             // console.log(this.musicList);
             // console.log(this.lyricList.lyric);//打印一下歌词
             // console.log(typeof(this.lyricList.lyric));
+            this.addDuration()
         },
-        props:['musicList','isbtnShow','play'],
+        props:['musicList','isbtnShow','play','addDuration'],
         methods:{
             ...mapMutations(['updateDetailShow','updatePlayListIndex']),
             backHome:function(){
@@ -171,7 +173,7 @@
             }
         },
         watch:{
-            currentTime:function(){
+            currentTime:function(newValue){
                 let p=document.querySelector("p.active")
                 // console.log([p]);
                 if(p){
@@ -181,6 +183,17 @@
                     }
 
                 }
+                if(newValue===this.duration){
+                    if(this.playListIndex===this.playList.length-1){
+                        this.updatePlayListIndex(0)
+                        this.play()
+                        
+                    }else{
+                        this.updatePlayListIndex(this.playListIndex+1)
+                    }
+                }
+
+
                 
                
                 // console.log([this.$refs.musicLyric]); 
@@ -254,7 +267,7 @@
     }
     .active{
         color: #fff;
-        font-size: 25px;
+        font-size: 16px;
     }
 
     .detailContent{
@@ -337,6 +350,10 @@
         height: 18px;
         fill: rgb(245,234, 234);
 
+    }
+    .range{
+        width: 100%;
+        height: 0.06rem;
     }
 
 
