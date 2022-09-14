@@ -36,7 +36,7 @@
     <div class="musicLyric" ref="musicLyric" v-show="isLyricShow" @click="isLyricShow=false">
         <!-- {{lyricList}}
         {{lyric}} -->
-       <p v-for="item in lyric" :key="item" :class="{active:(currentTime*1000>=item.time && currentTime*1000<item.pre)}" class="lyrics">
+       <p v-for="item in lyric" :key="item" :class="{lyricActive:(currentTime*1000>=item.time && currentTime*1000<item.pre)}" class="lyrics">
         {{item.lrc}}
        </p>
     </div>
@@ -265,7 +265,7 @@
         margin-bottom: 20px;
         
     }
-    .active{
+    .lyricActive{
         color: #fff;
         font-size: 16px;
     }
