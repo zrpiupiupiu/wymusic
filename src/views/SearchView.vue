@@ -4,11 +4,46 @@
             <use xlink:href="#icon-zuojiantou"></use>
         </svg>
 
-        <input type="text" placeholder="搜索框" >
+        <input type="text" placeholder="搜索框" v-model="searchKey" @keydown.enter="enterKey" >
        
     </div>
+    <div class="searchHistory">
+        <span class="searchSpan">历史</span>
+        <span v-for=" item in keyWordList" :key="item" class="spanKey">
+            {{item}}
+        </span>
+
+        <svg class="deleteIcon" aria-hidden="true" >
+            <use xlink:href="#icon-shanchu"></use>
+        </svg>
+    </div>
+
+
 </template>
 
+<script>
+    export default {
+        data(){
+            return{
+                keyWordList:[],
+                searchKey:""
+            }
+        },
+        mounted(){
+            this.keyWordList=JSON.parse(localStorage.getItem('keyWordList')) ||[]
+        },
+        
+        methods:{
+            enterKey:function (){
+                this.keyWordList.push(this.searchKey);
+                localStorage.setItem("keyWordList",JSON.stringify(this.keyWordList) )
+                this.searchKey=""
+
+            }
+        }
+
+    }
+</script>
 
 <style>
     .searchTop{
@@ -27,5 +62,30 @@
         border-bottom: 1px solid #999;
         width: 95%;
         padding: 5px;
+    }
+    .searchHistory{
+        width: 100%;
+        height: 35px;
+        padding: 10px;
+        position: relative;
+        
+
+    }
+    .searchSpan{
+        font-weight: 700;
+    }
+
+    .spanKey{
+        padding: 5px 10px;
+        background-color: rgb(185, 169, 169);
+        border-radius: 20px;
+        margin: 5px 10px;
+
+    }
+    .deleteIcon{
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        right: 10px;
     }
 </style>
