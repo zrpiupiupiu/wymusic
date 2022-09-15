@@ -13,7 +13,7 @@
             {{item}}
         </span>
 
-        <svg class="deleteIcon" aria-hidden="true" >
+        <svg class="deleteIcon" aria-hidden="true" @click="delHistory" >
             <use xlink:href="#icon-shanchu"></use>
         </svg>
     </div>
@@ -35,10 +35,22 @@
         
         methods:{
             enterKey:function (){
-                this.keyWordList.push(this.searchKey);
+                if(this.searchKey!==""){
+                    this.keyWordList.unshift(this.searchKey);
+                //去重
+                this.keyWordList=[...new Set(this.keyWordList)]
+                //固定长度
+                if(this,this.keyWordList.length>4){
+                    this.keyWordList.splice(this.keyWordList.length-1,1)
+                }
                 localStorage.setItem("keyWordList",JSON.stringify(this.keyWordList) )
                 this.searchKey=""
-
+                }
+                
+            },
+            delHistory:function(){
+                localStorage.removeItem("keyWordList")
+                this.keyWordList=[]
             }
         }
 
@@ -80,6 +92,7 @@
         background-color: rgb(185, 169, 169);
         border-radius: 20px;
         margin: 5px 10px;
+        display: inline-block;
 
     }
     .deleteIcon{
