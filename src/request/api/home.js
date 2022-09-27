@@ -17,3 +17,12 @@ export function getMusicList(){
         url:'/personalized?limit=15'
     })
 }
+
+//实现搜索/cloudsearch?keywords=海阔天空
+export function getSearchMusic(data){
+
+    return service({
+        method:'get',
+        url:`/cloudsearch?keywords=${data}` //反引号
+    })
+}

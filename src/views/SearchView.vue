@@ -9,7 +9,7 @@
     </div>
     <div class="searchHistory">
         <span class="searchSpan">历史</span>
-        <span v-for=" item in keyWordList" :key="item" class="spanKey">
+        <span v-for=" item in keyWordList" :key="item" class="spanKey" @click="searchHistory(item)">
             {{item}}
         </span>
 
@@ -22,11 +22,14 @@
 </template>
 
 <script>
+    import { getSearchMusic } from '@/request/api/home.js'
+
     export default {
         data(){
             return{
                 keyWordList:[],
-                searchKey:""
+                searchKey:"",
+                searchList:[],
             }
         },
         mounted(){
@@ -34,7 +37,7 @@
         },
         
         methods:{
-            enterKey:function (){
+            enterKey: async function (){
                 if(this.searchKey!==""){
                     this.keyWordList.unshift(this.searchKey);
                 //去重
@@ -44,13 +47,24 @@
                     this.keyWordList.splice(this.keyWordList.length-1,1)
                 }
                 localStorage.setItem("keyWordList",JSON.stringify(this.keyWordList) )
+                let res = await getSearchMusic(this.searchKey)
+                console.log(res);
+
+                this.searchList=res.data.result.soons
+                // console.log(this.searchList);
+
                 this.searchKey=""
                 }
                 
             },
             delHistory:function(){
                 localStorage.removeItem("keyWordList")
-                this.keyWordList=[]
+                this.searchList=[]
+            },
+            searchHistory:async function(item){
+                let res=await getSearchMusic(item);
+                console.log(res);
+                this.searchList=res.data.result.songs;
             }
         }
 
