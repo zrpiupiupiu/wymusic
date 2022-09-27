@@ -17,6 +17,33 @@
             <use xlink:href="#icon-shanchu"></use>
         </svg>
     </div>
+    <div class="itemList" v-for="(item,i) in searchList" :key="i">
+            
+            <!-- 左边部分 -->
+            <div class="itemListLeft" @click="updateIndex(item)" >
+                <span class="leftSpan">{{ i + 1}}</span>
+                <div>
+                    <p>{{item.name}}</P>
+                    <span v-for="(item1,index) in item.ar" :key="index" class="arName">
+                        {{item1.name}}
+                    </span>
+                </div>
+            </div>
+
+            <!-- 右边部分 -->
+            <div class="itemListRight">
+                <svg class="icon" aria-hidden="true" v-if='item.mv != 0'>
+                    <use xlink:href="#icon-shipinbofang"></use>
+                </svg>
+                <svg class="icon" aria-hidden="true" >
+                    <use xlink:href="#icon-24gl-ellipsisVertical"></use>
+                </svg>
+
+
+
+            </div>
+           
+        </div>
 
 
 </template>
@@ -65,7 +92,11 @@
                 let res=await getSearchMusic(item);
                 console.log(res);
                 this.searchList=res.data.result.songs;
-            }
+            },
+            updateIndex:function(item){
+                this.$store.commit("pushPlayList",item)
+                this.$store.commit("updatePlayListIndex",this.$store.state.playList.length-1)
+            },
         }
 
     }
@@ -91,7 +122,7 @@
     }
     .searchHistory{
         width: 100%;
-        height: 35px;
+        height: 1.5rem;
         padding: 10px;
         position: relative;
         
@@ -115,4 +146,6 @@
         position: absolute;
         right: 10px;
     }
+
+    
 </style>

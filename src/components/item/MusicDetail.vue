@@ -179,7 +179,6 @@
                 if(p){
                     if(p.offsetTop>250){
                         this.$refs.musicLyric.scrollTop=p.offsetTop-250
-                  
                     }
 
                 }
