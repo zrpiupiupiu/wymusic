@@ -26,7 +26,7 @@
     
 </template>
 
-<style>
+<style scoped>
     .topNav{
         width: 100%;
         height: 50px;

@@ -205,7 +205,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     .bgImg{
         width: 100%;
         height:100%;

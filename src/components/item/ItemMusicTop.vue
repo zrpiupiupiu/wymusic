@@ -89,7 +89,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     .itemMusicTop{
         width: 100%;
         height: 1rem;

@@ -28,7 +28,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
     .iconlist{
 
         margin-top: 10px;

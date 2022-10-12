@@ -69,7 +69,7 @@ import { mapMutations } from 'vuex'
     }
 </script>
 
-<style>
+<style scoped>
 
     .itemMusicList{
         width:100%;

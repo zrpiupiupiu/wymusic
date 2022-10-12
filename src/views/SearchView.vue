@@ -102,7 +102,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     .searchTop{
         width: 100%;
         height: 1rem;

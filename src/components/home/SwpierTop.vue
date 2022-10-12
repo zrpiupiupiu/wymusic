@@ -44,7 +44,7 @@
 
 </script>
 
-<style>
+<style scoped>
     .van-swipe{
         width: 100%;
         padding: 10px;
