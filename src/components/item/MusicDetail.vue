@@ -107,7 +107,7 @@
     import { mapMutations, mapState } from 'vuex';
 
     export default {
-        date(){
+        data(){
             return{
                 isLyricShow:false
             }
@@ -153,7 +153,7 @@
             // console.log(typeof(this.lyricList.lyric));
             this.addDuration()
         },
-        props:['musicList','isbtnShow','play','addDuration'],
+        props:['musicList','isbtnShow','play','addDuration',],
         methods:{
             ...mapMutations(['updateDetailShow','updatePlayListIndex']),
             backHome:function(){
