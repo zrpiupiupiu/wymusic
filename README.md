@@ -1,4 +1,4 @@
-# wymusic
+# :beer: wymusic
 
 ## Project setup
 ```
