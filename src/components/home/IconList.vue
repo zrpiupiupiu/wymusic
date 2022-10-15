@@ -38,7 +38,7 @@
         justify-content: space-around;
         align-items: center;
     }
-
+    
     .iconItem{
         width: 25%;
         height: 100%;
